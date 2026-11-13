@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marcela — Portfólio UX/UI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F4EEE8;
+    --cream-2:#EBE2D9;
+    --ink:#2A0B08;
+    --ink-soft:#5B3B36;
+    --accent:#9B1C1C;
+    --line:rgba(42,11,8,.16);
+    --radius:22px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{background:var(--cream);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img,video{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1240px,100% - 48px);margin-inline:auto}
+  .label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+  .script{font-family:'Great Vibes',cursive;color:var(--accent);font-weight:400;letter-spacing:0;text-transform:none;line-height:1}
+  .cond{font-family:Anton,Impact,sans-serif;text-transform:uppercase;line-height:.92;letter-spacing:.005em;font-weight:400}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:50;background:rgba(244,238,232,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
+  header.scrolled{border-color:var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .menu{display:flex;gap:clamp(20px,5vw,72px)}
+  .menu a{position:relative;padding:4px 0}
+  .menu a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--ink);transition:right .3s}
+  .menu a:hover::after,.menu a.active::after{right:0}
+  .pill{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--cream);border-radius:999px;padding:11px 20px;transition:background .25s,transform .25s}
+  .pill:hover{background:var(--accent);transform:translateY(-1px)}
+  .pill svg{width:14px;height:14px}
+
+  /* HERO */
+  .hero{padding:clamp(48px,8vw,110px) 0 clamp(60px,8vw,100px);display:grid;grid-template-columns:1.35fr 1fr;gap:48px;align-items:center}
+  .hero h1{margin-top:0!important;white-space:nowrap;font-family:Archivo,sans-serif;font-weight:900;font-size:clamp(52px,8.4vw,124px);line-height:.86;letter-spacing:-.035em;text-transform:uppercase;margin:22px 0 0;position:relative;display:inline-block}
+  .hero h1 .star{position:absolute;right:-.72em;top:-.08em;width:.6em;height:.6em;color:var(--accent);animation:spin 14s linear infinite}
+  .hero .script.over{position:absolute;right:-.15em;bottom:-.64em;font-size:.66em;transform:rotate(-6deg)}
+  .hero p.lead{max-width:470px;margin-top:56px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;line-height:1.7}
+  .hero p.lead b{font-weight:600}
+  .hero .ctas{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+  .ghost{display:inline-flex;align-items:center;border:1px solid var(--ink);border-radius:999px;padding:11px 20px;transition:background .25s,color .25s}
+  .ghost:hover{background:var(--ink);color:var(--cream)}
+  .photo{justify-self:end;width:min(100%,400px);position:relative}
+  .photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 20%;border-radius:var(--radius);filter:saturate(.92)}
+  .photo .tag{position:absolute;left:-22px;bottom:28px;background:var(--cream);border:1px solid var(--ink);border-radius:999px;padding:9px 16px;display:flex;gap:8px;align-items:center}
+  .photo .tag i{width:8px;height:8px;border-radius:50%;background:#2f9e5b;display:block;animation:pulse 2s infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes pulse{50%{opacity:.35}}
+
+  /* STRIP */
+  .strip{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .tile{position:relative;overflow:hidden;aspect-ratio:16/11;display:block;background:#371C3B}
+  .tile img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+  .tile:hover img{transform:scale(1.045)}
+  .tile .cap{position:absolute;inset:auto 0 0 0;padding:26px 28px;display:flex;justify-content:space-between;align-items:flex-end;color:#fff;background:linear-gradient(transparent,rgba(20,6,4,.65))}
+  .tile .cap h3{font-family:Anton,sans-serif;font-weight:400;font-size:clamp(28px,3.4vw,46px);text-transform:uppercase;line-height:1}
+  .tile .num{font-size:11px;letter-spacing:.14em}
+  .tile.habitare img{object-position:top center}
+  .strip-foot{display:flex;justify-content:space-between;gap:24px;padding:18px 0 0;border-top:0;flex-wrap:wrap}
+
+  /* SECTIONS */
+  section{padding:clamp(80px,11vw,150px) 0}
+  .sec-head{display:flex;flex-direction:column;align-items:flex-start;margin-bottom:56px}
+  .sec-head h2{font-size:clamp(52px,8vw,112px)}
+  .sec-head .script{font-size:clamp(40px,5vw,70px);margin-top:-.02em;margin-left:.06em}
+  .sec-head .sp{flex:1}
+  /* DIVISÓRIA DE BRILHOS */
+  .divider{overflow:hidden;padding:6px 0;color:var(--accent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .divider .track{display:flex;width:max-content;animation:marq 40s linear infinite}
+  .divider .grp{display:flex;align-items:center;gap:clamp(30px,3.4vw,52px);padding-right:clamp(30px,3.4vw,52px)}
+  .divider svg{width:clamp(26px,2.6vw,38px);height:clamp(26px,2.6vw,38px);flex:none}
+  @keyframes marq{to{transform:translateX(-50%)}}
+
+  /* ABOUT */
+  #sobre{border-top:1px solid var(--line)}
+  .about{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(40px,7vw,110px);align-items:start}
+  .about .big{font-family:Archivo,sans-serif;font-weight:700;font-size:clamp(24px,2.6vw,36px);line-height:1.22;letter-spacing:-.015em}
+  .about .big em{font-style:normal;color:var(--accent)}
+  .skills{margin-top:44px;border-top:1px solid var(--line)}
+  .skills li{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+  .skills li span:first-child{font-family:Anton,sans-serif;font-size:22px;text-transform:uppercase}
+
+  /* CASE */
+  .case{padding-top:0}
+  .case-top{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:end;padding:28px 0;border-top:1px solid var(--ink);margin-bottom:40px}
+  .case-top .n{font-family:Anton,sans-serif;font-size:20px}
+  .case-top h3{font-size:clamp(56px,9vw,128px)}
+  .case-top .meta{text-align:right;display:grid;gap:4px}
+  .case-intro{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,90px);margin-bottom:64px}
+  .case-intro p{font-size:17px;color:var(--ink-soft);max-width:540px}
+  .case-intro .script{font-size:clamp(44px,5vw,66px)}
+  .block-title{display:flex;align-items:center;gap:12px;margin:72px 0 22px}
+  .block-title::after{content:"";flex:1;height:1px;background:var(--line)}
+
+
+  .case-head{border-top:1px solid var(--ink);padding-top:30px}
+  .case-head h3{font-size:clamp(64px,10vw,140px)}
+  .case-head .sub{display:block;font-size:clamp(44px,5.4vw,78px);margin-top:-.08em;margin-left:.08em}
+  .case-desc{max-width:640px;margin:26px 0 64px}
+  .case-desc p{font-size:17px;color:var(--ink-soft);text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+
+  /* Agatah */
+  .ag{--ag-gold:#C68D33;--ag-plum:#371C3B;--ag-rose:#F5E8F4}
+  .logos-v{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .logos-v img,.logos-h img{width:100%;height:100%;object-fit:cover;border-radius:14px}
+  .logos-mix{display:grid;grid-template-columns:1.24fr 1fr;gap:10px;margin-top:10px}
+  .logos-h{display:grid;grid-template-rows:repeat(3,1fr);gap:10px}
+  .motion{position:relative;background:var(--ag-plum);border-radius:14px;overflow:hidden;min-height:420px}
+  .motion video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .motion .badge{position:absolute;left:16px;top:16px;background:rgba(245,232,244,.92);color:var(--ag-plum);border-radius:999px;padding:7px 13px;display:flex;align-items:center;gap:8px}
+  .motion .badge i{width:7px;height:7px;border-radius:50%;background:var(--ag-gold);animation:pulse 1.6s infinite}
+  .motion button{position:absolute;right:14px;bottom:14px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(245,232,244,.92);color:var(--ag-plum);cursor:pointer;display:grid;place-items:center}
+  .motion button svg{width:14px;height:14px}
+
+  .palette{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .sw{border-radius:14px;aspect-ratio:3/4;padding:22px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;border:0;text-align:left;font:inherit;transition:transform .3s}
+  .sw:hover{transform:translateY(-4px)}
+  .sw .hex{font-family:Archivo,sans-serif;font-weight:700;font-size:clamp(18px,2.2vw,30px);letter-spacing:.02em}
+  .sw .copy{opacity:.75}
+  .sw.gold{background:var(--ag-gold);color:var(--ag-plum)}
+  .sw.plum{background:var(--ag-plum);color:var(--ag-rose)}
+  .sw.rose{background:var(--ag-rose);color:var(--ag-plum);box-shadow:inset 0 0 0 1px rgba(55,28,59,.12)}
+
+  .type{padding:8px 0}
+  .type img{width:100%;max-width:1100px;mix-blend-mode:multiply}
+  .type .info{background:var(--ag-plum);color:var(--ag-rose);border-radius:14px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+  .type .info h4{font-family:Archivo,sans-serif;font-size:26px;font-weight:700;line-height:1.1}
+  .type .info dl{display:grid;gap:14px}
+  .type .info dt{opacity:.6}
+  .type .info dd{font-family:Archivo,sans-serif;font-weight:700;font-size:20px}
+  .type .spec{background:var(--ag-rose);border-radius:14px;overflow:hidden;display:grid;place-items:center;padding:20px}
+
+  .mockups{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+  .mockups figure{overflow:hidden;border-radius:14px;background:#eee}
+  .mockups img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+  .mockups figure:hover img{transform:scale(1.04)}
+  .m1{grid-column:span 4}.m2{grid-column:span 2}
+  .m3{grid-column:span 2}.m4{grid-column:span 2}.m5{grid-column:span 2}
+  .m6{grid-column:span 6}
+  .m2 img,.m3 img{object-position:center}
+
+  /* Habitare */
+  .devices{display:grid;grid-template-columns:1fr 300px;gap:clamp(20px,4vw,48px);align-items:start}
+  .browser{border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 30px 60px -30px rgba(42,11,8,.35);border:1px solid var(--line)}
+  .browser .bar{height:38px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#EFE8E1;border-bottom:1px solid var(--line)}
+  .browser .bar i{width:10px;height:10px;border-radius:50%;background:#d9cbbd;display:block}
+  .browser .bar span{margin-left:14px;background:#fff;border-radius:6px;padding:3px 12px;font-size:11px;color:var(--ink-soft)}
+  .scroller{height:620px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--ink) transparent}
+  .scroller img{width:100%}
+  .phone{border-radius:40px;padding:10px;background:var(--ink);box-shadow:0 30px 60px -30px rgba(42,11,8,.5)}
+  .phone .scroller{height:600px;border-radius:30px;background:#fff}
+  .hint{display:flex;align-items:center;gap:8px;margin-bottom:14px;color:var(--ink-soft);min-height:16px}
+  .hint svg{width:14px;height:14px;animation:bob 1.6s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(3px)}}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .chips span{border:1px solid var(--ink);border-radius:999px;padding:6px 13px}
+
+  /* CONTACT */
+  #contato{background:var(--ink);color:var(--cream);position:relative;overflow:hidden}
+  #contato .script{color:#F2B8B8;font-size:clamp(84px,12vw,180px);display:block;position:relative;z-index:2;margin-bottom:-.32em;margin-left:-.05em;transform:rotate(-6deg);transform-origin:left bottom;text-shadow:0 0 .25em rgba(42,11,8,.9),0 0 .08em rgba(42,11,8,1)}
+  #contato h2{position:relative;z-index:1;padding-left:.7em}
+  #contato h2{font-size:clamp(60px,11vw,170px)}
+  .contact-row{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-top:48px}
+  .contact-row p{max-width:420px;opacity:.8}
+  .links{display:flex;gap:12px;flex-wrap:wrap}
+  .links a{border:1px solid rgba(244,238,232,.4);border-radius:999px;padding:12px 20px;transition:background .25s,color .25s}
+  .links a:hover{background:var(--cream);color:var(--ink)}
+  #contato .bigstar{position:absolute;right:-60px;top:-60px;width:320px;height:320px;color:var(--accent);opacity:.9;animation:spin 30s linear infinite}
+
+  footer{background:var(--ink);color:rgba(244,238,232,.7);border-top:1px solid rgba(244,238,232,.15)}
+  footer .wrap{display:flex;justify-content:flex-start;gap:20px;padding:22px 0;flex-wrap:wrap}
+  footer .menu a::after{background:var(--cream)}
+
+
+  /* SKILLS */
+  #habilidades{}
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-left:1px solid var(--line)}
+  .skill{display:flex;align-items:center;gap:22px;padding:34px 28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:background .35s,color .35s}
+  .skill .mono{flex:none;width:64px;height:64px;border-radius:16px;border:1.5px solid currentColor;display:grid;place-items:center;font-family:Archivo,sans-serif;font-weight:700;font-size:24px;letter-spacing:-.02em;transition:background .35s,color .35s,border-color .35s}
+  .skill h3{font-family:Anton,sans-serif;font-weight:400;font-size:clamp(22px,2.2vw,30px);text-transform:uppercase;line-height:1.05}
+  .skill p{color:var(--ink-soft);margin-top:6px;transition:color .35s}
+  .skill:hover{background:var(--ink);color:var(--cream)}
+  .skill:hover .mono{background:var(--accent);border-color:var(--accent)}
+  .skill:hover p{color:rgba(244,238,232,.7)}
+
+  /* PROJECT LIST */
+  .plist{border-top:1px solid var(--ink)}
+  .prow{display:grid;grid-template-columns:70px minmax(0,1fr) auto 64px;align-items:center;gap:24px;padding:30px 20px;border-bottom:1px solid var(--ink);transition:background .4s,color .4s,padding .4s}
+  .prow .n{font-family:Archivo,sans-serif;font-weight:700;font-size:15px}
+  .prow .name{font-size:clamp(56px,9vw,124px);transition:transform .4s}
+  .prow .cat{text-align:right;line-height:1.8}
+  .prow .go{width:56px;height:56px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center;transition:transform .4s,background .4s,border-color .4s}
+  .prow .go svg{width:20px;height:20px}
+  .prow:hover{background:var(--ink);color:var(--cream);padding-left:34px;padding-right:34px}
+  .prow:hover .name{transform:translateX(10px)}
+  .prow:hover .go{background:var(--accent);border-color:var(--accent);transform:rotate(-45deg)}
+
+  /* PROJECT VIEW */
+  .pbar{padding:32px 0 48px}
+  .pbar .ghost{gap:10px}
+  .back{width:14px;height:14px;transform:rotate(180deg)}
+  .pview .case{padding-top:0!important}
+  .pnext{padding:20px 0 110px}
+  .pnext .prow{border-top:1px solid var(--ink)}
+  .pnext .prow .name{font-size:clamp(44px,7vw,96px)}
+  .pnext .prow .n{font-family:Inter,sans-serif;font-weight:500;font-size:11px}
+
+  /* CONTACT LIST */
+  .contact-row{justify-content:flex-start!important}
+  .clist{display:grid;gap:14px}
+  .clist a{display:flex;align-items:center;gap:18px;transition:color .3s,transform .3s}
+  .clist .ic{width:52px;height:52px;border-radius:50%;border:1px solid rgba(244,238,232,.35);display:grid;place-items:center;flex:none;transition:background .3s,border-color .3s,color .3s}
+  .clist .ic svg{width:22px;height:22px}
+  .clist .v{font-family:Archivo,sans-serif;font-weight:500;font-size:clamp(17px,1.6vw,21px)}
+  .clist a:hover{color:#F2B8B8;transform:translateX(6px)}
+  .clist a:hover .ic{background:var(--accent);border-color:var(--accent);color:var(--cream)}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:var(--ink);color:var(--cream);padding:10px 18px;border-radius:999px;opacity:0;transition:.3s;pointer-events:none;z-index:99}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  @media (max-width:900px){
+    .menu{display:none}
+    .skills-grid{grid-template-columns:1fr 1fr}
+    .prow{grid-template-columns:32px minmax(0,1fr) 44px;gap:14px;padding:24px 8px}
+    .prow .cat{display:none}
+    .prow .name{font-size:clamp(36px,12vw,64px);min-width:0}
+    .pnext .prow .name{font-size:clamp(32px,10vw,56px)}
+    #contato h2{font-size:clamp(44px,13vw,110px);padding-left:.45em}
+    #contato .bigstar{width:200px;height:200px;right:-50px;top:-50px}
+    .prow .go{width:44px;height:44px}
+    .prow:hover{padding-left:16px;padding-right:16px}
+    #mlogo{display:block!important;font-weight:600}
+    .hero h1 .star{right:-.68em}
+    .hero{grid-template-columns:1fr}
+    .photo{justify-self:start;width:min(100%,340px)}
+    .hero p.lead{margin-top:44px}
+    .strip{grid-template-columns:1fr}
+    .about,.case-intro{grid-template-columns:1fr}
+    .case-top{grid-template-columns:auto 1fr}
+    .case-top .meta{grid-column:1/-1;text-align:left}
+    .logos-mix{grid-template-columns:1fr}
+    .motion{aspect-ratio:9/12;min-height:0}
+    .type{grid-template-columns:1fr}
+    .mockups{grid-template-columns:1fr 1fr}
+    .m1,.m6{grid-column:span 2}.m2,.m3,.m4,.m5{grid-column:span 1}
+    .devices{grid-template-columns:1fr}
+    .phone{position:relative;top:0;width:280px;margin-inline:auto}
+    .scroller{height:460px}
+  }
+  @media (max-width:560px){
+    .logos-v,.palette{grid-template-columns:1fr 1fr 1fr;gap:6px}
+    .sw{padding:12px}
+    .sw .copy{display:none}
+    .pill span{display:none}
+  }
+  @media (max-width:560px){
+    .skills-grid{grid-template-columns:1fr}
+    .skill{padding:22px 18px}
+    .clist .v{font-size:16px}
+    .clist .ic{width:44px;height:44px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="star" viewBox="0 0 100 100"><g fill="currentColor"><rect x="44" y="0" width="12" height="100" rx="6"/><rect x="44" y="0" width="12" height="100" rx="6" transform="rotate(45 50 50)"/><rect x="44" y="0" width="12" height="100" rx="6" transform="rotate(90 50 50)"/><rect x="44" y="0" width="12" height="100" rx="6" transform="rotate(135 50 50)"/></g></symbol>
+  <symbol id="sparkle" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0z"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<header id="top">
+  <nav class="wrap">
+    <div class="menu label">
+      <a href="#top" class="active">Sobre</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <span class="label" style="display:none" id="mlogo">Marcela</span>
+    <a href="#contato" class="pill label"><span>Vamos conversar</span><svg><use href="#arrow"/></svg></a>
+  </nav>
+</header>
+
+<main>
+<div id="home">
+  <div class="wrap hero">
+    <div>
+      <h1 class="rv">Marcela<svg class="star"><use href="#star"/></svg><span class="script over">portfólio</span></h1>
+      <p class="lead rv">Designer que atua em <b>UX/UI</b>, <b>identidade visual</b> e <b>social media</b>, sempre com o olhar voltado para a <b>experiência do usuário</b>. Crio interfaces, marcas e conteúdos que conversam entre si, para que cada ponto de contato faça sentido para quem está do outro lado. Pronta para criar, evoluir e crescer junto com empresas que estão em transformação.</p>
+      <div class="ctas rv">
+        <a href="#projetos" class="pill label">Ver projetos <svg><use href="#arrow"/></svg></a>
+      </div>
+    </div>
+    <div class="photo rv">
+      <img src="assets/foto.jpg" alt="Foto da Marcela">
+    </div>
+  </div>
+
+  <div class="divider" aria-hidden="true"><div class="track"><div class="grp"><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg></div><div class="grp"><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg></div></div></div>
+
+  <section id="habilidades">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2 class="cond">Habilidades</h2><span class="script">programas</span>
+        
+      </div>
+      <div class="skills-grid">
+        <div class="skill rv"><span class="mono">Pr</span><div><h3>Premiere Pro</h3><p class="label">Edição de vídeo</p></div></div>
+        <div class="skill rv"><span class="mono">Dr</span><div><h3>DaVinci Resolve</h3><p class="label">Edição &amp; cor</p></div></div>
+        <div class="skill rv"><span class="mono">Ai</span><div><h3>Illustrator</h3><p class="label">Vetor &amp; identidade</p></div></div>
+        <div class="skill rv"><span class="mono">Ae</span><div><h3>After Effects</h3><p class="label">Motion &amp; animação</p></div></div>
+        <div class="skill rv"><span class="mono">Ps</span><div><h3>Photoshop</h3><p class="label">Imagem &amp; tratamento</p></div></div>
+        <div class="skill rv"><span class="mono">Ca</span><div><h3>Canva</h3><p class="label">Peças &amp; conteúdo</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><div class="track"><div class="grp"><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg></div><div class="grp"><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg><svg><use href="#sparkle"/></svg></div></div></div>
+
+  <section id="projetos">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2 class="cond">Projetos</h2><span class="script">selecionados</span>
+        
+      </div>
+      <div class="plist">
+        <a class="prow rv" href="#agatah"><span class="n">01</span><span class="name cond">Agatah</span><span class="cat label">Identidade visual<br>Velas aromáticas</span><span class="go"><svg><use href="#arrow"/></svg></span></a>
+        <a class="prow rv" href="#habitare"><span class="n">02</span><span class="name cond">Habitare</span><span class="cat label">UX/UI · Web design<br>Pet Club Hotel</span><span class="go"><svg><use href="#arrow"/></svg></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <svg class="bigstar"><use href="#star"/></svg>
+    <div class="wrap">
+      <span class="script rv">vamos</span>
+      <h2 class="cond rv">Trabalhar<br>juntos?</h2>
+      <div class="contact-row rv">
+        <div class="clist">
+          <a href="https://wa.me/5527999424328" target="_blank" rel="noopener"><span class="ic" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.5-4.3A8.5 8.5 0 1 1 20.5 11.6z"/><path d="M9 8.6c.2-.5.6-.6.9-.6h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.6l-.5.6c-.1.2-.1.4 0 .5.6 1 1.4 1.8 2.4 2.3.2.1.4.1.5 0l.6-.6c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.2.7-.6.9-.7.4-1.6.5-2.8 0-1.9-.8-3.6-2.5-4.4-4.4-.5-1.2-.4-2.1 0-2.8z"/></svg></span><span class="v">(27) 99942-4328</span></a>
+          <a href="mailto:agss.marcelaa@gmail.com"><span class="ic" aria-label="E-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></span><span class="v">agss.marcelaa@gmail.com</span></a>
+          <a href="https://www.linkedin.com/in/marcelagomes2/" target="_blank" rel="noopener"><span class="ic" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 10.5V16.5M8 7.6v.1M11.5 16.5v-6M11.5 13c0-1.6 1-2.6 2.4-2.6 1.4 0 2.1 1 2.1 2.6v3.5"/></svg></span><span class="v">/in/marcelagomes2</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+  <!-- CASE 01 — AGATAH -->
+<div class="pview" data-p="agatah" hidden>
+  <div class="wrap pbar"><a href="#projetos" class="ghost label"><svg class="back"><use href="#arrow"/></svg>Voltar aos projetos</a></div>
+  <section class="case ag" id="case-agatah">
+    <div class="wrap">
+      <div class="case-head rv">
+        <h3 class="cond">Agatah</h3>
+        <span class="script sub">transformar emoções em aroma</span>
+      </div>
+      <div class="case-desc rv">
+        <p>Identidade visual para uma marca de velas aromáticas. O símbolo une a inicial A, a lua e a chama em linhas simples e elegantes, que conversam com a serenidade da noite e com o ritual de acender uma vela.</p>
+      </div>
+
+      <div class="block-title label rv">Logotipo</div>
+      <div class="logos-v rv">
+        <img src="assets/logo-v-rosa.jpg" alt="Logo Agatah vertical sobre rosa">
+        <img src="assets/logo-v-mostarda.jpg" alt="Logo Agatah vertical sobre mostarda">
+        <img src="assets/logo-v-roxo.jpg" alt="Logo Agatah vertical sobre roxo">
+      </div>
+      <div class="logos-mix rv">
+        <div class="motion">
+          <video id="mv" poster="assets/agatah-motion-poster.jpg" src="assets/agatah-motion.mp4" autoplay muted loop playsinline preload="auto"></video>
+          <span class="badge label"><i></i>Motion da logo</span>
+          <button id="mvbtn" aria-label="Pausar animação"><svg viewBox="0 0 24 24"><g id="ico"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></g></svg></button>
+        </div>
+        <div class="logos-h">
+          <img src="assets/logo-h-rosa.jpg" alt="Logo Agatah horizontal sobre rosa">
+          <img src="assets/logo-h-roxo.jpg" alt="Logo Agatah horizontal sobre roxo">
+          <img src="assets/logo-h-mostarda.jpg" alt="Logo Agatah horizontal sobre mostarda">
+        </div>
+      </div>
+
+      <div class="block-title label rv">Paleta de cor</div>
+      <div class="palette rv">
+        <button class="sw gold" data-hex="#C68D33"><span class="label copy">Clique para copiar</span><span class="hex">#C68D33</span></button>
+        <button class="sw plum" data-hex="#371C3B"><span class="label copy">Clique para copiar</span><span class="hex">#371C3B</span></button>
+        <button class="sw rose" data-hex="#F5E8F4"><span class="label copy">Clique para copiar</span><span class="hex">#F5E8F4</span></button>
+      </div>
+
+      <div class="block-title label rv">Tipografia</div>
+      <div class="type rv"><img src="assets/tipografia.jpg" alt="Specimen das fontes Luxorea e Zag Bold"></div>
+
+      <div class="block-title label rv">Mockups</div>
+      <div class="mockups">
+        <figure class="m1 rv"><img src="assets/mk-adesivos.jpg" alt="Adesivos Agatah"></figure>
+        <figure class="m2 rv"><img src="assets/mk-tags.jpg" alt="Tags Agatah"></figure>
+        <figure class="m3 rv"><img src="assets/mk-cartoes.jpg" alt="Cartões Agatah"></figure>
+        <figure class="m4 rv"><img src="assets/mk-vela-clara.jpg" alt="Vela Agatah clara"></figure>
+        <figure class="m5 rv"><img src="assets/mk-vela-roxa.jpg" alt="Vela Agatah roxa"></figure>
+        <figure class="m6 rv"><img src="assets/mk-sacolas.jpg" alt="Sacolas Agatah"></figure>
+      </div>
+    </div>
+  </section>
+  <div class="wrap pnext"><a href="#habitare" class="prow"><span class="n label">Próximo</span><span class="name cond">Habitare</span><span class="cat label"></span><span class="go"><svg><use href="#arrow"/></svg></span></a></div>
+</div>
+
+  <!-- CASE 02 — HABITARE -->
+<div class="pview" data-p="habitare" hidden>
+  <div class="wrap pbar"><a href="#projetos" class="ghost label"><svg class="back"><use href="#arrow"/></svg>Voltar aos projetos</a></div>
+  <section class="case" id="case-habitare" style="padding-top:clamp(40px,6vw,80px)">
+    <div class="wrap">
+      <div class="case-head rv">
+        <h3 class="cond">Habitare</h3>
+        <span class="script sub">o segundo lar que ele merece</span>
+      </div>
+      <div class="case-desc rv">
+        <p>Site para um hotel e daycare de cães em Vila Velha, pensado nas versões desktop e mobile. A navegação leva o tutor da apresentação aos serviços, rotina, depoimentos e preços, até o contato, sem atrito.</p>
+          <div class="chips label"><span>Quem somos</span><span>Serviços</span><span>Galeria</span><span>Rotina</span><span>Depoimentos</span><span>Preços</span><span>FAQ</span><span>Contatos</span></div>
+      </div>
+
+      <div class="devices">
+        <div class="rv">
+          <p class="hint label"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M6 13l6 6 6-6"/></svg>Role dentro da tela para ver o site completo</p>
+          <div class="browser">
+            <div class="bar"><i></i><i></i><i></i><span>habitarepetclub.com.br</span></div>
+            <div class="scroller"><img src="assets/habitare-web.jpg" alt="Site Habitare versão desktop"></div>
+          </div>
+        </div>
+        <div class="rv">
+          <p class="hint label" style="justify-content:center">Versão mobile</p>
+          <div class="phone"><div class="scroller"><img src="assets/habitare-mobile.jpg" alt="Site Habitare versão mobile"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="wrap pnext"><a href="#agatah" class="prow"><span class="n label">Próximo</span><span class="name cond">Agatah</span><span class="cat label"></span><span class="go"><svg><use href="#arrow"/></svg></span></a></div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap label"><span>© 2026 Marcela</span></div>
+</footer>
+
+<div class="toast label" id="toast">Copiado!</div>
+
+<script>
+  // header border on scroll
+  const hd=document.querySelector('header');
+  addEventListener('scroll',()=>hd.classList.toggle('scrolled',scrollY>10),{passive:true});
+
+  // reveal
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*60+'ms';io.observe(el)});
+
+  // router: projetos abrem em páginas separadas
+  const home=document.getElementById('home');
+  const views=[...document.querySelectorAll('.pview')];
+  const links=[...document.querySelectorAll('header .menu a')];
+  function setActive(i){links.forEach((l,j)=>l.classList.toggle('active',j===i))}
+  function route(){
+    const h=location.hash.slice(1);
+    const v=views.find(x=>x.dataset.p===h);
+    if(v){
+      home.hidden=true; views.forEach(x=>x.hidden=x!==v);
+      v.querySelectorAll('.rv').forEach(e=>{e.classList.remove('in');io.observe(e)});
+      scrollTo({top:0,behavior:'instant'}); setActive(2);
+      const vid=v.querySelector('video'); if(vid) vid.play().catch(()=>{});
+    }else{
+      const wasHidden=home.hidden;
+      home.hidden=false; views.forEach(x=>x.hidden=true);
+      const el=h&&document.getElementById(h);
+      if(el) requestAnimationFrame(()=>el.scrollIntoView({behavior:wasHidden?'instant':'smooth'}));
+      else if(wasHidden) scrollTo({top:0,behavior:'instant'});
+    }
+  }
+  addEventListener('hashchange',route); route();
+  const map={top:0,habilidades:1,projetos:2,contato:3};
+  const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!home.hidden)setActive(map[e.target.id])}),{rootMargin:'-45% 0px -50% 0px'});
+  ['habilidades','projetos','contato'].forEach(id=>so.observe(document.getElementById(id)));
+  addEventListener('scroll',()=>{if(scrollY<200&&!home.hidden)setActive(0)},{passive:true});
+  document.querySelector('header .menu a[href="#top"]').addEventListener('click',e=>{if(!home.hidden&&!location.hash.match(/agatah|habitare/))return;e.preventDefault();history.pushState(null,'',location.pathname);route();scrollTo({top:0})});
+
+  // video toggle
+  const v=document.getElementById('mv'),b=document.getElementById('mvbtn'),ico=document.getElementById('ico');
+  const play='<path d="M7 5l12 7-12 7z" fill="currentColor"/>',pause='<rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/>';
+  b.addEventListener('click',()=>{if(v.paused){v.play().catch(()=>{});ico.innerHTML=pause;b.ariaLabel='Pausar animação'}else{v.pause();ico.innerHTML=play;b.ariaLabel='Reproduzir animação'}});
+
+  // copy hex
+  const t=document.getElementById('toast');
+  document.querySelectorAll('.sw').forEach(s=>s.addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(s.dataset.hex);t.textContent=s.dataset.hex+' copiado!'}catch(e){t.textContent=s.dataset.hex}
+    t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),1600);
+  }));
+</script>
+</body>
+</html>

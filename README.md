@@ -95,4 +95,4 @@ Depois é só acessar `http://localhost:8000`.
 
 ---
 
-© 2026 Marcela. Todos os direitos reservados. Os projetos e imagens deste repositório são de autoria própria e não podem ser reutilizados sem autorização.# marcela
+© 2026 Marcela. Todos os direitos reservados. Os projetos e imagens deste repositório são de autoria própria e não podem ser reutilizados sem autorização.
